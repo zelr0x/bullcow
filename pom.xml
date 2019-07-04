@@ -18,6 +18,20 @@
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
+  <pluginRepositories>
+    <pluginRepository>
+      <id>apache.snapshots</id>
+      <name>Apache Snapshots</name>
+      <url>http://repository.apache.org/content/groups/snapshots-group/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -98,6 +112,18 @@
               </goals>
             </execution>
           </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <version>2.3-SNAPSHOT</version>
+          <configuration>
+            <charset>UTF-8</charset>
+            <url>http://localhost:8080/manager/text</url>
+            <server>localhost</server>
+            <path>/</path>
+            <update>true</update>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
