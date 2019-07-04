@@ -46,6 +46,7 @@
 
   <build>
     <finalName>BullCow</finalName>
+    <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>
