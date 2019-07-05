@@ -31,14 +31,12 @@ public final class Game {
      * Evaluates guess. Each bull represents a correctly positioned
      * and correctly guessed digit. Each cow represents an incorrectly
      * positioned digit that is present in the target number.
-     * @param guess a string representation of a guess
+     * @param digits the digits of a guess
      * @return GuessResult object containing the evaluation of this guess
      * @throws IllegalArgumentException if guess is of incorrect size
      * or contains non-numeric data
      */
-    public GuessResult checkGuess(final String guess)
-            throws IllegalArgumentException {
-        final int[] digits = prefixNormalize(getDigits(guess), targetLength);
+    public GuessResult checkGuess(final int[] digits) {
         int bulls = 0;
         final Set<Integer> cowCandidates = new HashSet<>(targetLength);
         for (int i = 0; i < targetLength; i++) {
@@ -56,6 +54,20 @@ public final class Game {
                 .bulls(bulls)
                 .cows(cows)
                 .build();
+    }
+
+    /**
+     * Evaluates guess. Each bull represents a correctly positioned
+     * and correctly guessed digit. Each cow represents an incorrectly
+     * positioned digit that is present in the target number.
+     * @param guess a string representation of a guess
+     * @return GuessResult object containing the evaluation of this guess
+     * @throws IllegalArgumentException if guess is of incorrect size
+     * or contains non-numeric data
+     */
+    public GuessResult checkGuess(final String guess)
+            throws IllegalArgumentException {
+        return checkGuess(prefixNormalize(getDigits(guess), targetLength));
     }
 
     /**
