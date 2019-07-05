@@ -8,6 +8,12 @@
     <jsp-property-group>
       <url-pattern>*.jsp</url-pattern>
       <scripting-invalid>true</scripting-invalid>
+      <el-ignored>false</el-ignored>
+      <trim-directive-whitespaces>true</trim-directive-whitespaces>
     </jsp-property-group>
   </jsp-config>
+  <context-param>
+    <param-name>gameName</param-name>
+    <param-value>Bulls and Cows</param-value>
+  </context-param>
 </web-app>
