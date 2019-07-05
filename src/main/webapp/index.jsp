@@ -1,27 +1,22 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Bulls and Cows game" />
+<%@ page contentType="text/html"
+         pageEncoding="UTF-8"
+         isELIgnored="false" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" />
-
-    <link rel="stylesheet" href="css/style.css" />
-
-    <title>Bulls and Cows</title>
-</head>
-<body>
-    <header class="header">
+<t:wrapper title="${initParam.gameName} | Home">
+    <jsp:attribute name="headExtra">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet"/>
+    </jsp:attribute>
+    <jsp:attribute name="header">
         <div class="header__text-box">
             <h1 class="heading-primary">
-                <div class="heading-primary--main">Bulls and Cows</div>
+                <div class="heading-primary--main">${initParam.gameName}</div>
             </h1>
             <a href="/play" class="btn btn--white btn--animated">Play!</a>
+            <a href="/rating" class="btn btn--white btn--animated">Rankings</a>
         </div>
-    </header>
-    <footer class="footer">
+    </jsp:attribute>
+    <jsp:attribute name="footer">
         <div class="footer__attribution">Photo by Robert Bye on Unsplash</div>
-    </footer>
-</body>
-</html>
+    </jsp:attribute>
+</t:wrapper>
