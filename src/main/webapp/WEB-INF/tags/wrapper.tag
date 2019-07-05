@@ -1,7 +1,6 @@
 <%@ tag description="Main Wrapper Tag"
         pageEncoding="UTF-8"
-        trimDirectiveWhitespaces="true"
-        isELIgnored="false" %>
+        trimDirectiveWhitespaces="true" %>
 <%@ attribute name="headExtra" fragment="true" %>
 <%@ attribute name="header" fragment="true" %>
 <%@ attribute name="main" fragment="true" %>
