@@ -1,9 +1,13 @@
 package io.github.zelr0x.bullcow.game;
 
+import java.io.Serializable;
+
 /**
- * GuessResult object represents the result of a bulls and cows game guess.
+ * GuessResult encapsulates the result of a bulls and cows game guess.
  */
-public final class GuessResult {
+public final class GuessResult implements Serializable {
+    private static final long serialVersionUID = 2938475665L;
+
     private final int total;
     private final int bulls;
     private final int cows;

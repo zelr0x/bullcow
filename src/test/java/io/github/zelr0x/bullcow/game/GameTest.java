@@ -16,7 +16,7 @@ public class GameTest {
     }
 
     @Test
-    public void testCheckGuess3b0c() {
+    public void testCheckGuess3b0c() throws Exception {
         final GuessResult guess = game.checkGuess("0125");
         Assert.assertEquals("-- 3b0c: bulls--", 3, guess.getBulls());
         Assert.assertEquals("-- 3b0c: cows--", 0, guess.getCows());
@@ -25,7 +25,7 @@ public class GameTest {
     }
 
     @Test
-    public void testCheckGuess0b0c() {
+    public void testCheckGuess0b0c() throws Exception {
         final GuessResult guess = game.checkGuess("9876");
         Assert.assertEquals("-- 0b0c: bulls--", 0, guess.getBulls());
         Assert.assertEquals("-- 0b0c: cows--", 0, guess.getCows());
@@ -34,7 +34,7 @@ public class GameTest {
     }
 
     @Test
-    public void testCheckGuess0b4c() {
+    public void testCheckGuess0b4c() throws Exception {
         final GuessResult guess = game.checkGuess("3210");
         Assert.assertEquals("-- 0b4c: bulls--", 0, guess.getBulls());
         Assert.assertEquals("-- 0b4c: cows--", 4, guess.getCows());
@@ -43,7 +43,7 @@ public class GameTest {
     }
 
     @Test
-    public void testCheckGuess2b1c() {
+    public void testCheckGuess2b1c() throws Exception {
         final GuessResult guess = game.checkGuess("5120");
         Assert.assertEquals("-- 2b1c: bulls--", 2, guess.getBulls());
         Assert.assertEquals("-- 2b1c: cows--", 1, guess.getCows());
@@ -52,7 +52,7 @@ public class GameTest {
     }
 
     @Test
-    public void testCheckGuess2b2c() {
+    public void testCheckGuess2b2c() throws Exception {
         final GuessResult guess = game.checkGuess("0321");
         Assert.assertEquals("-- 2b2c: bulls--", 2, guess.getBulls());
         Assert.assertEquals("-- 2b2c: cows--", 2, guess.getCows());
@@ -61,7 +61,7 @@ public class GameTest {
     }
 
     @Test
-    public void testCheckGuess4b0c() {
+    public void testCheckGuess4b0c() throws Exception {
         final GuessResult guess = game.checkGuess("0123");
         Assert.assertEquals("-- 4b0c: bulls--", 4, guess.getBulls());
         Assert.assertEquals("-- 4b0c: cows--", 0, guess.getCows());
@@ -70,21 +70,14 @@ public class GameTest {
     }
 
     @Test
-    public void testGenerateTarget() {
-        final Game game = new Game();
-        Assert.assertEquals("-- Length of generated target --",
-                4, game.getTargetDigits().length);
-    }
-
-    @Test
-    public void testPrefixZeros() {
+    public void testCheckGuessPrefix() throws Exception {
         final GuessResult guess = game.checkGuess("23");
         Assert.assertEquals("-- 3b0c: bulls--", 3, guess.getBulls());
         Assert.assertEquals("-- 3b0c: cows--", 0, guess.getCows());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testCheckGuessTooLong() {
+    @Test(expected = NumberParseException.class)
+    public void testCheckGuessTooLong() throws Exception {
         final int length = game.getTargetDigits().length + 1;
         final GuessResult guess = game.checkGuess(
                 IntStream.iterate(0, i -> 0)
@@ -92,8 +85,8 @@ public class GameTest {
                         .toString());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testCheckGuessAlphabetical() {
+    @Test(expected = NumberParseException.class)
+    public void testCheckGuessAlphabetical() throws Exception {
         final GuessResult guess = game.checkGuess("abcd");
     }
 }

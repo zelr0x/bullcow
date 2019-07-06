@@ -4,17 +4,14 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static io.github.zelr0x.bullcow.game.NumericUtils.generateDistinctDigitNumber;
-import static io.github.zelr0x.bullcow.game.NumericUtils.getDigits;
-import static io.github.zelr0x.bullcow.game.NumericUtils.prefixNormalize;
-
 /**
  * Bulls and cows game.
  * Doesn't handle duplicate letters in a target word (by specification).
  */
 public final class Game {
+    public static final int DEFAULT_LENGTH = 4;
+
     private static final int MAX_LENGTH = 10;
-    private static final int DEFAULT_LENGTH = 4;
 
     private final int targetLength;
     private final int[] targetDigits;
@@ -62,12 +59,14 @@ public final class Game {
      * positioned digit that is present in the target number.
      * @param guess a string representation of a guess
      * @return GuessResult object containing the evaluation of this guess
-     * @throws IllegalArgumentException if guess is of incorrect size
+     * @throws NumberParseException if guess is of incorrect size
      * or contains non-numeric data
      */
     public GuessResult checkGuess(final String guess)
-            throws IllegalArgumentException {
-        return checkGuess(prefixNormalize(getDigits(guess), targetLength));
+            throws NumberParseException {
+        return checkGuess(NumericUtils.prefixNormalize(
+                NumericUtils.getDigits(guess),
+                targetLength));
     }
 
     /**
@@ -78,7 +77,8 @@ public final class Game {
         this.targetLength = targetLength <= MAX_LENGTH
                 ? targetLength
                 : DEFAULT_LENGTH;
-        this.targetDigits = generateDistinctDigitNumber(targetLength);
+        this.targetDigits =
+                NumericUtils.generateDistinctDigitNumber(targetLength);
     }
 
     /**

@@ -2,6 +2,7 @@ package io.github.zelr0x.bullcow.game;
 
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -16,19 +17,20 @@ public final class NumericUtils {
      * an array of digits in that number.
      * @param number a string representation of the number
      * @return an array of digits of the number
-     * @throws IllegalArgumentException if the number contains
+     * @throws NumberParseException if the number contains
      * non-numeric data
      */
     public static int[] getDigits(final String number)
-            throws IllegalArgumentException {
-        final String digits = number.trim();
-        if (digits.chars().allMatch(Character::isDigit)) {
-            return digits.chars()
-                    .map(Character::getNumericValue)
-                    .toArray();
+            throws NumberParseException {
+        final String trimmed = number.trim();
+        int result;
+        try {
+            result = Integer.parseInt(trimmed);
+        } catch (NumberFormatException e) {
+            throw new NumberParseException(
+                    "Number string should consist solely of integers");
         }
-        throw new IllegalArgumentException(
-                "Number string should consist solely of integers");
+        return getDigits(result, trimmed.length());
     }
 
     /**
@@ -53,15 +55,15 @@ public final class NumericUtils {
      * @param digits an initial array
      * @param targetLength  length of a target array
      * @return a normalized version of the array
-     * @throws IllegalArgumentException if initial array length
+     * @throws NumberParseException if initial array length
      * is greater than the targetLength
      */
     public static int[] prefixNormalize(final int[] digits,
                                         final int targetLength)
-            throws IllegalArgumentException {
+            throws NumberParseException {
         final int diff = targetLength - digits.length;
         if (diff < 0) {
-            throw new IllegalArgumentException(
+            throw new NumberParseException(
                     "The number is longer than the target length");
         }
         return (diff == 0)
@@ -96,6 +98,45 @@ public final class NumericUtils {
                 .distinct()
                 .limit(length)
                 .toArray();
+    }
+
+    /**
+     * Returns string representation of a specified array
+     * delimited with a specified delimiter.
+     * @param arr an array of int
+     * @param delimiter a delimiter
+     * @return String of all items in arr delimited by delimiter
+     */
+    public static String joinIntArray(final int[] arr,
+                                      final String delimiter) {
+        return Arrays.stream(arr)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.joining(delimiter));
+    }
+
+    /**
+     * Returns string representation of a specified array
+     * delimited with no delimiter.
+     * @param arr an array of int
+     * @return String of all items in arr
+     */
+    public static String joinIntArray(final int[] arr) {
+        return joinIntArray(arr, "");
+    }
+
+    /**
+     * Prefixes array with zeros if needed. Joins all its contents
+     * into a string with no delimiter.
+     * @param arr an array of int
+     * @param targetLength the length of the target array
+     * @return Formatted String of all items in arr
+     * @throws NumberParseException if initial array length
+     * is greater than the targetLength
+     */
+    public static String prefixJoinIntArray(final int[] arr,
+                                            final int targetLength)
+            throws NumberParseException {
+        return joinIntArray(prefixNormalize(arr, targetLength));
     }
 
     /**
