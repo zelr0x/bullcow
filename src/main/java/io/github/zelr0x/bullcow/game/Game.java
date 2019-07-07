@@ -1,5 +1,10 @@
 package io.github.zelr0x.bullcow.game;
 
+import io.github.zelr0x.bullcow.game.exception.LongGuessException;
+import io.github.zelr0x.bullcow.game.exception.NonNumericGuessException;
+import io.github.zelr0x.bullcow.util.NumberParseException;
+import io.github.zelr0x.bullcow.util.NumericUtils;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +14,7 @@ import java.util.Set;
  * Doesn't handle duplicate letters in a target word (by specification).
  */
 public final class Game {
-    public static final int DEFAULT_LENGTH = 4;
+    static final int DEFAULT_LENGTH = 4;
 
     private static final int MAX_LENGTH = 10;
 
@@ -17,33 +22,48 @@ public final class Game {
     private final int[] targetDigits;
 
     /**
-     * Returns the digits of a target number.
-     * @return the digits of a target number
-     */
-    public int[] getTargetDigits() {
-        return targetDigits;
-    }
-
-    /**
      * Evaluates guess. Each bull represents a correctly positioned
      * and correctly guessed digit. Each cow represents an incorrectly
      * positioned digit that is present in the target number.
-     * @param digits the digits of a guess
+     * @param guess a Guess
      * @return GuessResult object containing the evaluation of this guess
-     * @throws IllegalArgumentException if guess is of incorrect size
-     * or contains non-numeric data
+     * @throws NumberParseException (one of its subclasses)
+     * if guess is of incorrect size or contains malformed data
      */
-    public GuessResult checkGuess(final int[] digits) {
+    public GuessResult checkGuess(final Guess guess)
+            throws NumberParseException {
+        final String guessString = guess.getGuess();
+        if (guessString.length() > targetLength) {
+            throw new LongGuessException(targetLength);
+        }
+
+        try {
+            final int[] digits = NumericUtils.prefixNormalize(
+                    NumericUtils.getDigits(guessString),
+                    targetLength);
+            return checkGuess(digits);
+        } catch (final NumberParseException e) {
+            throw new NonNumericGuessException();
+        }
+    }
+
+    /**
+     * {@link #checkGuess(Guess)} helper method.
+     * Suitable for testing and required for production.
+     * @param guess the digits of the guess
+     * @return GuessResult object containing the evaluation of this guess
+     */
+    GuessResult checkGuess(final int[] guess) {
         int bulls = 0;
         final Set<Integer> cowCandidates = new HashSet<>(targetLength);
         for (int i = 0; i < targetLength; i++) {
-            if (targetDigits[i] == digits[i]) {
+            if (targetDigits[i] == guess[i]) {
                 bulls++;
             } else {
                 cowCandidates.add(targetDigits[i]);
             }
         }
-        final int cows = (int) Arrays.stream(digits)
+        final int cows = (int) Arrays.stream(guess)
                 .distinct()
                 .filter(cowCandidates::contains)
                 .count();
@@ -51,22 +71,6 @@ public final class Game {
                 .bulls(bulls)
                 .cows(cows)
                 .build();
-    }
-
-    /**
-     * Evaluates guess. Each bull represents a correctly positioned
-     * and correctly guessed digit. Each cow represents an incorrectly
-     * positioned digit that is present in the target number.
-     * @param guess a string representation of a guess
-     * @return GuessResult object containing the evaluation of this guess
-     * @throws NumberParseException if guess is of incorrect size
-     * or contains non-numeric data
-     */
-    public GuessResult checkGuess(final String guess)
-            throws NumberParseException {
-        return checkGuess(NumericUtils.prefixNormalize(
-                NumericUtils.getDigits(guess),
-                targetLength));
     }
 
     /**
@@ -90,10 +94,20 @@ public final class Game {
 
     /**
      * Starts a game session for a specified target number.
+     * Made for testing purposes.
      * @param target the digits of a target number
      */
-    public Game(final int[] target) {
+    Game(final int[] target) {
         this(target.length);
         System.arraycopy(target, 0, this.targetDigits, 0, target.length);
+    }
+
+    /**
+     * Returns the digits of a target number.
+     * Made for testing purposes.
+     * @return the digits of a target number
+     */
+    int[] getTargetDigits() {
+        return targetDigits;
     }
 }
