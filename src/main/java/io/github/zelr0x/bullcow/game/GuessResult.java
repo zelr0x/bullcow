@@ -8,9 +8,9 @@ import java.io.Serializable;
 public final class GuessResult implements Serializable {
     private static final long serialVersionUID = 2938475665L;
 
-    private final int total;
     private final int bulls;
     private final int cows;
+    private final boolean solved;
 
     /**
      * Constructs a GuessResult object with a specified builder.
@@ -18,9 +18,9 @@ public final class GuessResult implements Serializable {
      *                the parameters of the result
      */
     private GuessResult(final Builder builder) {
-        this.total = builder.total;
         this.bulls = builder.bulls;
         this.cows = builder.cows;
+        this.solved = bulls == builder.total;
     }
 
     /**
@@ -49,7 +49,7 @@ public final class GuessResult implements Serializable {
     @Override
     public String toString() {
         final String result = bulls + "B" + cows + "C";
-        return bulls == total
+        return solved
                 ? result + " (correct guess)"
                 : result;
     }
