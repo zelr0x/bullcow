@@ -1,5 +1,6 @@
 package io.github.zelr0x.bullcow.game;
 
+import io.github.zelr0x.bullcow.util.NumericUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
