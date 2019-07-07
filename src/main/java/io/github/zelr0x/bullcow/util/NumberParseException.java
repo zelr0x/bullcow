@@ -1,4 +1,4 @@
-package io.github.zelr0x.bullcow.game;
+package io.github.zelr0x.bullcow.util;
 
 /**
  * Indicates failed attempt to parse a number.
@@ -6,7 +6,7 @@ package io.github.zelr0x.bullcow.game;
  */
 public class NumberParseException extends Exception {
     /**
-     * Construct an exception with a message.
+     * Constructs an exception with a given message.
      * @param message a message
      */
     public NumberParseException(final String message) {

@@ -1,4 +1,4 @@
-package io.github.zelr0x.bullcow.game;
+package io.github.zelr0x.bullcow.util;
 
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
@@ -22,15 +22,14 @@ public final class NumericUtils {
      */
     public static int[] getDigits(final String number)
             throws NumberParseException {
-        final String trimmed = number.trim();
         int result;
         try {
-            result = Integer.parseInt(trimmed);
+            result = Integer.parseInt(number);
         } catch (NumberFormatException e) {
             throw new NumberParseException(
                     "Number string should consist solely of integers");
         }
-        return getDigits(result, trimmed.length());
+        return getDigits(result, number.length());
     }
 
     /**
