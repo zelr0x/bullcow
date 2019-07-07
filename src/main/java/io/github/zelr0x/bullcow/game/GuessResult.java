@@ -27,7 +27,7 @@ public final class GuessResult implements Serializable {
      * Returns a number of "bulls" - correctly guessed digits.
      * @return a number of correctly guessed digits
      */
-    public int getBulls() {
+    int getBulls() {
         return bulls;
     }
 
@@ -37,7 +37,7 @@ public final class GuessResult implements Serializable {
      * @return a number of incorrectly positioned digits
      * present in a target number
      */
-    public int getCows() {
+    int getCows() {
         return cows;
     }
 
@@ -57,7 +57,7 @@ public final class GuessResult implements Serializable {
     /**
      * Builder builds GuessResult step by step.
      */
-    public static final class Builder {
+    static final class Builder {
         private final int total;
         private int bulls = 0;
         private int cows = 0;
@@ -66,7 +66,7 @@ public final class GuessResult implements Serializable {
          * Creates GuessResult.Builder for a specified total number of digits.
          * @param total a total number of digits
          */
-        public Builder(final int total) {
+        Builder(final int total) {
             this.total = total;
         }
 
@@ -75,7 +75,7 @@ public final class GuessResult implements Serializable {
          * @param setBulls an amount of digits guessed correctly
          * @return GuessResult.Builder
          */
-        public Builder bulls(final int setBulls) {
+        Builder bulls(final int setBulls) {
             this.bulls = setBulls;
             return this;
         }
@@ -86,7 +86,7 @@ public final class GuessResult implements Serializable {
          *                in a number but positioned incorrectly
          * @return GuessResult.Builder
          */
-        public Builder cows(final int setCows) {
+        Builder cows(final int setCows) {
             this.cows = setCows;
             return this;
         }
@@ -96,7 +96,7 @@ public final class GuessResult implements Serializable {
          * of a given guess.
          * @return an result of a guess
          */
-        public GuessResult build() {
+        GuessResult build() {
             return new GuessResult(this);
         }
     }
