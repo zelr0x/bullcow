@@ -2,10 +2,9 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<t:wrapper title="${initParam.gameName} | Home">
-    <jsp:attribute name="headExtra">
-        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet"/>
-    </jsp:attribute>
+<t:wrapper title="${initParam.gameName} | Home"
+           headerClass="header--hero"
+           footerClass="footer--hero">
     <jsp:attribute name="header">
         <div class="header__text-box">
             <h1 class="heading-primary">
