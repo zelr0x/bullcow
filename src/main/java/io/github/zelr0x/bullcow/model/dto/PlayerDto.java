@@ -1,4 +1,4 @@
-package io.github.zelr0x.bullcow.dto;
+package io.github.zelr0x.bullcow.model.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -9,24 +9,24 @@ import java.util.Objects;
 public final class PlayerDto implements Serializable {
     private static final long serialVersionUID = 2913374135L;
 
-    private long rank;
-    private String name;
-    private int totalGames;
-    private double averageGuesses;
+    private final long rank;
+    private final String name;
+    private final int totalGames;
+    private final double averageGuesses;
 
     /**
      * Constructs a player.
      * @param rank the rank of the player
      * @param name the name of the player
-     * @param averageGuesses average number of guesses made before winning
+     * @param totalGuesses total number of guesses made
      * @param totalGames total number of games played
      */
     public PlayerDto(final long rank, final String name,
-                     final double averageGuesses, final int totalGames) {
+                     final int totalGames, final long totalGuesses) {
         this.rank = rank;
         this.name = name;
-        this.averageGuesses = averageGuesses;
         this.totalGames = totalGames;
+        this.averageGuesses = totalGuesses / totalGames;
     }
 
     /**

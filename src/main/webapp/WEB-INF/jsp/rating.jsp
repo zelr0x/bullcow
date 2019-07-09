@@ -1,6 +1,6 @@
 <%@ page contentType="text/html"
          pageEncoding="UTF-8"
-         import="io.github.zelr0x.bullcow.dto.PlayerDto" %>
+         import="io.github.zelr0x.bullcow.model.dto.PlayerDto" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:wrapper title="${initParam.gameName} | Rankings"

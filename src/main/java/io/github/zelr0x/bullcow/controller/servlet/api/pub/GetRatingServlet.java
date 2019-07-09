@@ -1,6 +1,6 @@
 package io.github.zelr0x.bullcow.controller.servlet.api.pub;
 
-import io.github.zelr0x.bullcow.dto.PlayerDto;
+import io.github.zelr0x.bullcow.model.dto.PlayerDto;
 import io.github.zelr0x.bullcow.service.UserService;
 import io.github.zelr0x.bullcow.util.JsonSerializer;
 import io.github.zelr0x.bullcow.util.NumericUtils;
