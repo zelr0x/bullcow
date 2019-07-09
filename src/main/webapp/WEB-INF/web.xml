@@ -5,6 +5,7 @@
 http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
   <display-name>Bulls and Cows Game</display-name>
+
   <jsp-config>
     <jsp-property-group>
       <url-pattern>*.jsp</url-pattern>
@@ -12,8 +13,35 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
       <trim-directive-whitespaces>true</trim-directive-whitespaces>
     </jsp-property-group>
   </jsp-config>
+
   <context-param>
     <param-name>gameName</param-name>
     <param-value>Bulls and Cows</param-value>
   </context-param>
+
+  <filter>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>io.github.zelr0x.bullcow.controller.filter.AuthFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>StaticFilter</filter-name>
+    <filter-class>io.github.zelr0x.bullcow.controller.filter.StaticFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>ApiFilter</filter-name>
+    <filter-class>io.github.zelr0x.bullcow.controller.filter.ApiFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>StaticFilter</filter-name>
+    <url-pattern>/static/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>ApiFilter</filter-name>
+    <url-pattern>/api/*</url-pattern>
+  </filter-mapping>
 </web-app>
