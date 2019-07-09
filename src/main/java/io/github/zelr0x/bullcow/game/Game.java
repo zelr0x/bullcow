@@ -14,9 +14,11 @@ import java.util.Set;
  * Doesn't handle duplicate letters in a target word (by specification).
  */
 public final class Game {
+
     static final int DEFAULT_LENGTH = 4;
 
     private static final int MAX_LENGTH = 10;
+    private static final int MIN_LENGTH = DEFAULT_LENGTH;
 
     private final int targetLength;
     private final int[] targetDigits;
@@ -74,11 +76,20 @@ public final class Game {
     }
 
     /**
+     * Returns the length of the target number of this game instance.
+     * @return the length of the target number
+     */
+    public int getTargetLength() {
+        return targetLength;
+    }
+
+    /**
      * Starts a game session for a specified target number length.
      * @param targetLength an amount of digits in a target number
      */
     public Game(final int targetLength) {
-        this.targetLength = targetLength <= MAX_LENGTH
+        this.targetLength = (targetLength <= MAX_LENGTH
+                            && targetLength >= MIN_LENGTH)
                 ? targetLength
                 : DEFAULT_LENGTH;
         this.targetDigits =
