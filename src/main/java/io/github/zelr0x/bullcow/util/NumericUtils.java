@@ -1,6 +1,7 @@
 package io.github.zelr0x.bullcow.util;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -13,6 +14,21 @@ public final class NumericUtils {
     private static final int RADIX = 10;
 
     /**
+     * Tries to convert a String representation of a number to an int.
+     * @param s a String to convert
+     * @return an Optional holding the resulting Integer or nothing
+     */
+    public static Optional<Integer> parseInt(final String s) {
+        Optional<Integer> result;
+        try {
+            result = Optional.of(Integer.parseInt(s));
+        } catch (final NumberFormatException e) {
+            result = Optional.empty();
+        }
+        return result;
+    }
+
+    /**
      * Tries to convert a String representation of a number to
      * an array of digits in that number.
      * @param number a string representation of the number
@@ -22,14 +38,12 @@ public final class NumericUtils {
      */
     public static int[] getDigits(final String number)
             throws NumberParseException {
-        int result;
-        try {
-            result = Integer.parseInt(number);
-        } catch (NumberFormatException e) {
+        final Optional<Integer> asInt = parseInt(number);
+        if (!asInt.isPresent()) {
             throw new NumberParseException(
                     "Number string should consist solely of integers");
         }
-        return getDigits(result, number.length());
+        return getDigits(asInt.get(), number.length());
     }
 
     /**
