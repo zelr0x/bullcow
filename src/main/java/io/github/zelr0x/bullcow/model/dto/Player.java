@@ -6,11 +6,11 @@ import java.util.Objects;
 /**
  * Encapsulates Player entity in a way suitable for transfer.
  */
-public final class PlayerDto implements Serializable {
+public final class Player extends User
+        implements Comparable<User>, Serializable {
     private static final long serialVersionUID = 2913374135L;
 
     private final long rank;
-    private final String name;
     private final int totalGames;
     private final double averageGuesses;
 
@@ -21,10 +21,10 @@ public final class PlayerDto implements Serializable {
      * @param totalGuesses total number of guesses made
      * @param totalGames total number of games played
      */
-    public PlayerDto(final long rank, final String name,
-                     final int totalGames, final long totalGuesses) {
+    public Player(final Long id, final String name, final long rank,
+                  final int totalGames, final long totalGuesses) {
+        super(id, name);
         this.rank = rank;
-        this.name = name;
         this.totalGames = totalGames;
         this.averageGuesses = totalGuesses / totalGames;
     }
@@ -35,14 +35,6 @@ public final class PlayerDto implements Serializable {
      */
     public long getRank() {
         return rank;
-    }
-
-    /**
-     * Returns the name of the player.
-     * @return the name of the player
-     */
-    public String getName() {
-        return name;
     }
 
     /**
@@ -61,21 +53,30 @@ public final class PlayerDto implements Serializable {
         return averageGuesses;
     }
 
+    @Override
+    public int compareTo(final User o) {
+        if (getClass() == o.getClass()) {
+            final Player player = (Player) o;
+            return Double.compare(averageGuesses, player.averageGuesses);
+        }
+        return super.compareTo(o);
+    }
+
     @SuppressWarnings("checkstyle:JavadocType")
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        final PlayerDto player = (PlayerDto) o;
+        final Player player = (Player) o;
         return rank == player.rank
                 && totalGames == player.totalGames
                 && Double.compare(player.averageGuesses, averageGuesses) == 0
-                && Objects.equals(name, player.name);
+                && Objects.equals(this.getName(), player.getName());
     }
 
     @SuppressWarnings("checkstyle:JavadocType")
     @Override
     public int hashCode() {
-        return Objects.hash(rank, name, totalGames, averageGuesses);
+        return Objects.hash(rank, this.getName(), totalGames, averageGuesses);
     }
 }

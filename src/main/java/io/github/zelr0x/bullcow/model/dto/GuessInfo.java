@@ -1,4 +1,4 @@
-package io.github.zelr0x.bullcow.model;
+package io.github.zelr0x.bullcow.model.dto;
 
 import io.github.zelr0x.bullcow.game.Guess;
 import io.github.zelr0x.bullcow.game.GuessResult;
