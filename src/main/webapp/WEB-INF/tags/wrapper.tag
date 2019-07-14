@@ -15,7 +15,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <%@ include file="../fragments/meta.jspf"%>
+    <%@ include file="../fragments/meta.jspf" %>
     <jsp:invoke fragment="headExtraExternal"/>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css"/>
