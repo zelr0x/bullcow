@@ -1,38 +1,22 @@
 package io.github.zelr0x.bullcow.controller.filter;
 
-import io.github.zelr0x.bullcow.service.IUserService;
-import io.github.zelr0x.bullcow.service.UserService;
-import io.github.zelr0x.bullcow.util.CollectionUtil;
+import io.github.zelr0x.bullcow.controller.SessionAttrStore;
+import io.github.zelr0x.bullcow.controller.RouteStore;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Set;
 
 /**
  * Filters all requests. The first filter of the application.
  */
 public final class AuthFilter implements Filter {
-    private static final String ROOT = "/";
-
-    static final String API_ROOT = "/api/";
-    static final String STATIC_ROOT = "/static/";
-
-    static final String RATING_ROUTE = "/rating";
-    static final String LOGIN_ROUTE = "/login";
-
-    /** NO_AUTH_ROUTES Should NOT include ROOT ("/"). */
-    private static final Set<String> NO_AUTH_ROUTES =
-            CollectionUtil.immutableSetOf(API_ROOT, STATIC_ROOT,
-                    RATING_ROUTE, LOGIN_ROUTE);
-
     @SuppressWarnings("checkstyle:JavadocType")
     @Override
     public void init(final FilterConfig filterConfig) {
@@ -60,24 +44,31 @@ public final class AuthFilter implements Filter {
         final HttpServletRequest request = (HttpServletRequest) servletRequest;
         final String uri = request.getRequestURI().toLowerCase();
 
-        if (uri.equals(ROOT)
-                || NO_AUTH_ROUTES.stream().anyMatch(uri::startsWith)) {
+        if (isAuthNotRequired(uri) || isLoggedIn(request)) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
 
+        servletRequest.getRequestDispatcher(RouteStore.LOGIN)
+                .forward(servletRequest, servletResponse);
+    }
+
+    private boolean isAuthNotRequired(final String uri) {
+        return uri.equals(RouteStore.ROOT)
+                || RouteStore.NO_AUTH_PATH_STARTS.stream()
+                    .anyMatch(uri::startsWith);
+    }
+
+    private boolean isLoggedIn(final HttpServletRequest request) {
         final HttpSession session = request.getSession(false);
         if (session != null) {
-            final IUserService userService = new UserService();
-            if (userService.checkJsessionid(session.getId())) {
-                filterChain.doFilter(servletRequest, servletResponse);
-                return;
-            }
+            final Boolean isLoggedIn = (Boolean) session
+                    .getAttribute(SessionAttrStore.IS_LOGGED_IN);
+            return isLoggedIn != null
+                    && request.isRequestedSessionIdValid()
+                    && isLoggedIn.equals(SessionAttrStore.LOGGED_IN);
         }
-
-        final RequestDispatcher dispatcher =
-                servletRequest.getRequestDispatcher(LOGIN_ROUTE);
-        dispatcher.forward(servletRequest, servletResponse);
+        return false;
     }
 
     @SuppressWarnings("checkstyle:JavadocType")

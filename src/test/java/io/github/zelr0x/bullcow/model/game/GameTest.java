@@ -74,7 +74,7 @@ public class GameTest {
         Assert.assertEquals("-- 4b0c: bulls--", 4, result.getBulls());
         Assert.assertEquals("-- 4b0c: cows--", 0, result.getCows());
         Assert.assertEquals("Correct guess message",
-                "4B0C (correct guess)", result.toString());
+                "4B0C. You won!", result.toString());
     }
 
     @Test
