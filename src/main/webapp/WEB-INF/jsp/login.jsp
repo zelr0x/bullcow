@@ -3,14 +3,14 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:wrapper title="${initParam.gameName} | Rankings"
+<t:wrapper title="${initParam.gameName} | Log in"
            bodyClass="body--green-bg"
            mainClass="main--center">
     <jsp:attribute name="headExtraExternal">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     </jsp:attribute>
     <jsp:attribute name="headExtraInternal">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/login.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/login.css"/>
     </jsp:attribute>
     <jsp:attribute name="main">
         <!-- https://codepen.io/ehermanson/pen/KwKWEv -->
@@ -23,26 +23,26 @@
             <div class="tab-content">
                 <div id="signup">
                     <h1>Sign Up for Free</h1>
-                    <form action="/register" method="post">
+                    <form action="/register" method="POST">
                         <div class="field-wrap">
                             <label>
                                 Username<span class="req">*</span>
                             </label>
-                            <input type="text" required autocomplete="off" />
+                            <input type="text" name="username" required autocomplete="off" />
                         </div>
 
                         <div class="field-wrap">
                             <label>
                                 Password<span class="req">*</span>
                             </label>
-                            <input type="password" required autocomplete="off" />
+                            <input type="password" name="password" required autocomplete="off" />
                         </div>
 
                         <div class="field-wrap">
                             <label>
                                 Repeat a Password<span class="req">*</span>
                             </label>
-                            <input type="password" required autocomplete="off" />
+                            <input type="password" name="password_repeat" required autocomplete="off" />
                         </div>
 
                         <button type="submit" class="button button-block" />Get Started</button>
@@ -51,21 +51,21 @@
 
                 <div id="login">
                     <h1>Welcome Back!</h1>
-                    <form action="/login" method="post">
+                    <form action="/login" method="POST">
                         <div class="field-wrap">
                             <label>
                                 Username<span class="req">*</span>
                             </label>
-                            <input type="text" required autocomplete="off" />
+                            <input type="text" name="username" required autocomplete="off" />
                         </div>
 
                         <div class="field-wrap">
                             <label>
                                 Password<span class="req">*</span>
                             </label>
-                            <input type="password" required autocomplete="off" />
+                            <input type="password" name="password" required autocomplete="off" />
                         </div>
-                        <button class="button button-block" />Log In</button>
+                        <button type="submit" class="button button-block" />Log In</button>
                     </form>
                 </div>
             </div>
