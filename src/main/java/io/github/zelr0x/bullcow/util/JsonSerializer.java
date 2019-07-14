@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import io.github.zelr0x.bullcow.model.dto.GuessDto;
 
 import java.util.List;
 
@@ -11,6 +12,10 @@ import java.util.List;
  * Encapsulates JSON serialization.
  */
 public final class JsonSerializer {
+    public static String serialize(final GuessDto guessDto) {
+        return Holder.GSON.toJson(guessDto);
+    }
+
     /**
      * Serializes list to JSON object containing it as an array
      * with a specified name: { "propertyName": [...list] }
