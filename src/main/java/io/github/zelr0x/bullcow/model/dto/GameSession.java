@@ -1,64 +1,91 @@
 package io.github.zelr0x.bullcow.model.dto;
 
-import io.github.zelr0x.bullcow.game.Game;
-import io.github.zelr0x.bullcow.game.Guess;
-import io.github.zelr0x.bullcow.game.GuessResult;
+import io.github.zelr0x.bullcow.model.game.Game;
+import io.github.zelr0x.bullcow.model.game.Guess;
+import io.github.zelr0x.bullcow.model.game.GuessResult;
 import io.github.zelr0x.bullcow.util.NumberParseException;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Encapsulates game session info.
  */
-public class GameSession implements Serializable {
-    private static final long serialVersionUID = 1913374655L;
+public final class GameSession implements Serializable {
+    private static final long serialVersionUID = 145614581L;
 
+    private static transient final boolean REPEAT_AS_NEW = false;
+
+    @com.google.gson.annotations.Expose(serialize = false)
     private Game game;
+
     private int turn;
-    private GuessInfo lastGuessInfo;
-    private List<String> errors;
+    private GuessDto lastGuess;
+    private String error;
 
     public GameSession() {
-        turn = 0;
-        game = new Game();
-        lastGuessInfo = null;
-        errors = new ArrayList<>();
+        this(new Game(), 0, null, "");
     }
 
-    public void makeGuess(final String guessString) {
-        if (guessString.equalsIgnoreCase(lastGuessInfo.getGuess())) {
-            turn++;
-            return;
+    /**
+     * Creates debug game session with target number always set to 1234.
+     *
+     */
+    public static GameSession forDebugging() {
+        return new GameSession(new Game(new int[]{1,2,3,4}));
+    }
+
+    public GuessDto makeGuess(final String guessString) {
+        if (lastGuess != null
+                && lastGuess.getGuess().equalsIgnoreCase(guessString)) {
+            if (REPEAT_AS_NEW) turn++;
+            return lastGuess;
         }
 
-        errors.clear();
-        final Guess guess = new Guess(guessString);
-        final GuessResult result;
-        try {
-            result = game.checkGuess(guess);
-        } catch (final NumberParseException e) {
-            errors.add(e.getMessage());
-            return;
-        }
-        lastGuessInfo = new GuessInfo(guess, result);
         turn++;
+        final Guess guess = new Guess(guessString);
+        try {
+            final GuessResult result = game.checkGuess(guess);
+            lastGuess = GuessDto.of(turn, guess, result, "");
+        } catch (final NumberParseException e) {
+            error = e.getMessage();
+            lastGuess = GuessDto.ofEmpty(turn, guess, error);
+       }
+        return lastGuess;
     }
 
     public int getLength() {
         return game.getTargetLength();
     }
 
+    public Game getGame() {
+        return game;
+    }
+
     public int getTurn() {
         return turn;
     }
 
-    public GuessInfo getLastGuessInfo() {
-        return lastGuessInfo;
+    public GuessDto getLastGuess() {
+        return lastGuess;
     }
 
-    public List<String> getErrors() {
-        return errors;
+    public String getError() {
+        return error;
+    }
+
+    public boolean isFinished() {
+        return lastGuess.isWinning();
+    }
+
+    private GameSession(final Game game, final int turn,
+                        final GuessDto lastGuess, final String error) {
+        this.game = game;
+        this.turn = turn;
+        this.lastGuess = lastGuess;
+        this.error = error;
+    }
+
+    private GameSession(final Game game) {
+        this(game, 0, null, "");
     }
 }
