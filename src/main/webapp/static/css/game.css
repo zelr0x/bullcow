@@ -1,0 +1,100 @@
+#guess-input {
+    width: 50%;
+    padding: 1rem 2rem;
+    margin: 1.5rem;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.keys {
+    margin-top: 20vh;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 47rem;
+}
+
+.key {
+    border: .4rem solid black;
+    border-radius: .5rem;
+    margin: .5rem;
+    font-size: 1.5rem;
+    padding: 1rem .5rem;
+    transition: all .07s ease;
+    width: 8rem;
+    text-align: center;
+    color:black;
+    background: rgba(255,255,255,0.8);
+    text-shadow: 0 0 .2rem black;
+}
+
+.key:active {
+    transform: scale(1.1);
+    border-color: #4caf50;
+    box-shadow: 0 0 1rem #4caf50;
+}
+
+.control-button {
+  background-color: white;
+  border: none;
+  color: rgba(4, 20, 0, 0.9);
+  padding: 1.5rem 3.2rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.6rem;
+  transition-duration: 0.4s;
+  min-width: 12rem;
+}
+
+.keys__control-buttons {
+    margin: 1.5rem;
+}
+
+.control-button:focus, .key:focus {
+    outline: 0;
+}
+
+.control-button:hover {
+  color: white;
+}
+
+.button-no:hover {
+    background-color: #f44336;
+}
+
+.button-yes:hover {
+    background-color: #4caf50;
+}
+
+.control-button:active {
+    transform: scale(1.05);
+}
+
+
+.button-no:active {
+    border-color: #f44336;
+    box-shadow: 0 0 1rem #f44336;
+}
+
+.button-yes:active {
+    border-color: #4caf50;
+    box-shadow: 0 0 1rem #4caf50;
+}
+
+#history-container {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    min-width: 18rem;
+    max-width: 26rem;
+    margin-top: 15vh;
+    margin-bottom: 5vh;
+    transform: translate(-50%, 0);
+}
+
+#history-table td:nth-of-type(3) {
+    min-width: 8vw;
+}
