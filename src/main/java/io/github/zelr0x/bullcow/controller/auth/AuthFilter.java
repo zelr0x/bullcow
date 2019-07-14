@@ -1,7 +1,6 @@
-package io.github.zelr0x.bullcow.controller.filter;
+package io.github.zelr0x.bullcow.controller.auth;
 
-import io.github.zelr0x.bullcow.controller.SessionAttrStore;
-import io.github.zelr0x.bullcow.controller.RouteStore;
+import io.github.zelr0x.bullcow.controller.util.RouteStore;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -9,13 +8,16 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
  * Filters all requests. The first filter of the application.
  */
+@WebFilter(
+        filterName = "AuthFilter",
+        urlPatterns = RouteStore.ROOT + "*")
 public final class AuthFilter implements Filter {
     @SuppressWarnings("checkstyle:JavadocType")
     @Override
@@ -44,31 +46,13 @@ public final class AuthFilter implements Filter {
         final HttpServletRequest request = (HttpServletRequest) servletRequest;
         final String uri = request.getRequestURI().toLowerCase();
 
-        if (isAuthNotRequired(uri) || isLoggedIn(request)) {
+        if (AuthUtil.isAuthNotRequired(uri) || AuthUtil.isLoggedIn(request)) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
 
         servletRequest.getRequestDispatcher(RouteStore.LOGIN)
                 .forward(servletRequest, servletResponse);
-    }
-
-    private boolean isAuthNotRequired(final String uri) {
-        return uri.equals(RouteStore.ROOT)
-                || RouteStore.NO_AUTH_PATH_STARTS.stream()
-                    .anyMatch(uri::startsWith);
-    }
-
-    private boolean isLoggedIn(final HttpServletRequest request) {
-        final HttpSession session = request.getSession(false);
-        if (session != null) {
-            final Boolean isLoggedIn = (Boolean) session
-                    .getAttribute(SessionAttrStore.IS_LOGGED_IN);
-            return isLoggedIn != null
-                    && request.isRequestedSessionIdValid()
-                    && isLoggedIn.equals(SessionAttrStore.LOGGED_IN);
-        }
-        return false;
     }
 
     @SuppressWarnings("checkstyle:JavadocType")

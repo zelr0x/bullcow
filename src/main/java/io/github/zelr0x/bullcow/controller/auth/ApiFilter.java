@@ -1,6 +1,6 @@
-package io.github.zelr0x.bullcow.controller.filter;
+package io.github.zelr0x.bullcow.controller.auth;
 
-import io.github.zelr0x.bullcow.controller.RouteStore;
+import io.github.zelr0x.bullcow.controller.util.RouteStore;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -8,12 +8,16 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
  * Filters requests to API endpoints.
  */
+@WebFilter(
+        filterName = "ApiFilter",
+        urlPatterns = RouteStore.API_ROOT + "*")
 public final class ApiFilter implements Filter {
     @Override
     public void init(final FilterConfig filterConfig) {
@@ -31,9 +35,9 @@ public final class ApiFilter implements Filter {
             final String path = request.getServletPath();
             servletRequest.getRequestDispatcher(path)
                     .forward(servletRequest, servletResponse);
-        } else {
-            filterChain.doFilter(servletRequest, servletResponse);
+            return;
         }
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
