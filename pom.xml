@@ -47,11 +47,15 @@
       <version>3.0.1</version>
       <scope>provided</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-impl -->
+
+    <!-- Adding "javax.servlet.jsp.jstl > jst-api" instead of this one
+         makes all pages return 404.
+         Apache tag libs aren't needed with this one too. -->
+    <!-- https://mvnrepository.com/artifact/jstl/jstl -->
     <dependency>
-      <groupId>org.apache.taglibs</groupId>
-      <artifactId>taglibs-standard-impl</artifactId>
-      <version>1.2.5</version>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
     <dependency>
@@ -76,6 +80,12 @@
       <groupId>postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>9.1-901-1.jdbc4</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.8.0-beta4</version>
     </dependency>
   </dependencies>
 
