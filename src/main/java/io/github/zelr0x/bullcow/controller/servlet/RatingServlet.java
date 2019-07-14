@@ -1,8 +1,8 @@
 package io.github.zelr0x.bullcow.controller.servlet;
 
-import io.github.zelr0x.bullcow.controller.servlet.api.pub.GetRatingServlet;
+import io.github.zelr0x.bullcow.controller.util.RouteStore;
+import io.github.zelr0x.bullcow.service.IPlayerService;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,9 +15,11 @@ import java.io.IOException;
  */
 @WebServlet(
         name = "RatingServlet",
-        urlPatterns = "/rating")
+        urlPatterns = {
+                RouteStore.RATING,
+                RouteStore.RANKINGS})
 public class RatingServlet extends HttpServlet {
-    private static final String RATING_PAGE_PATH = "/WEB-INF/jsp/rating.jsp";
+    private static final String RATING_PAGE = "/WEB-INF/jsp/rating.jsp";
     private static final String JSON_ARR_NAME = "players";
 
     /**
@@ -27,9 +29,21 @@ public class RatingServlet extends HttpServlet {
     protected void doGet(final HttpServletRequest request,
                          final HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute(JSON_ARR_NAME, GetRatingServlet.getPlayersJson());
-        final RequestDispatcher dispatcher =
-                request.getRequestDispatcher(RATING_PAGE_PATH);
-        dispatcher.forward(request, response);
+        process(request, response);
+    }
+
+    @Override
+    protected void doPost(final HttpServletRequest request,
+                          final HttpServletResponse response)
+            throws ServletException, IOException {
+        process(request, response);
+    }
+
+    private void process(final HttpServletRequest request,
+                         final HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setAttribute(JSON_ARR_NAME, IPlayerService.getPlayersJson());
+        request.getRequestDispatcher(RATING_PAGE)
+                .forward(request, response);
     }
 }

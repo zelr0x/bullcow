@@ -1,18 +1,18 @@
 const ratingTable = document.getElementById('rating-table__body');
 const tableEndIndex = -1;
 
-const users = JSON.parse(usersJson).users;
-users.forEach(user => {
+const players = JSON.parse(playersJson).players;
+players.forEach(player => {
     const row = ratingTable.insertRow(tableEndIndex);
     const rankCell = row.insertCell(0);
     const nameCell = row.insertCell(1);
     const averageGuessesCell = row.insertCell(2);
     const totalGamesCell = row.insertCell(3);
 
-    rankCell.innerHTML = user.rank;
-    nameCell.innerHTML = user.name;
-    averageGuessesCell.innerHTML = user.averageGuesses;
+    rankCell.innerHTML = player.rank;
+    nameCell.innerHTML = player.name;
+    averageGuessesCell.innerHTML = player.averageGuesses;
     averageGuessesCell.className = 'td--numeric';
-    totalGamesCell.innerHTML = user.totalGames;
+    totalGamesCell.innerHTML = player.totalGames;
     totalGamesCell.className = 'td--numeric';
 });

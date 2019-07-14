@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/table.css"/>
     </jsp:attribute>
     <jsp:attribute name="header">
+        <%@ include file="../fragments/nav.jspf" %>
         <div class="header__text-box">
             <h1 class="heading-primary">
                 <div class="heading-primary--main">Rankings</div>
@@ -30,7 +31,7 @@
         </table>
     </jsp:attribute>
     <jsp:attribute name="footer">
-        <script>const usersJson = '${requestScope.players}'</script>
+        <script>const playersJson = '${requestScope.players}'</script>
         <script src="${pageContext.request.contextPath}/static/js/rating.js"></script>
     </jsp:attribute>
 </t:wrapper>
