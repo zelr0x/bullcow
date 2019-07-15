@@ -40,7 +40,7 @@ public final class LogInServlet extends HttpServlet {
                          final HttpServletResponse response)
             throws ServletException, IOException {
         if (AuthUtil.isLoggedIn(request)) {
-            request.getRequestDispatcher(PathStore.LOGGED_IN_HOME);
+            response.sendRedirect(RouteStore.LOGGED_IN_HOME);
             return;
         }
 
@@ -70,7 +70,7 @@ public final class LogInServlet extends HttpServlet {
                           final HttpServletResponse response)
             throws ServletException, IOException {
         if (AuthUtil.isLoggedIn(request)) {
-            request.getRequestDispatcher(PathStore.LOGGED_IN_HOME);
+            response.sendRedirect(RouteStore.LOGGED_IN_HOME);
             return;
         }
 

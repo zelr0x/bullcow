@@ -40,9 +40,11 @@ public class RegistrationServlet extends HttpServlet {
     protected void doGet(final HttpServletRequest request,
                          final HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher(AuthUtil.isLoggedIn(request)
-                    ? PathStore.LOGGED_IN_HOME
-                    : PathStore.LOGIN_PAGE)
+        if (AuthUtil.isLoggedIn(request)) {
+            response.sendRedirect(RouteStore.LOGGED_IN_HOME);
+            return;
+        }
+        request.getRequestDispatcher(PathStore.LOGIN_PAGE)
                 .forward(request, response);
     }
 
@@ -62,7 +64,7 @@ public class RegistrationServlet extends HttpServlet {
                           final HttpServletResponse response)
             throws ServletException, IOException {
         if (AuthUtil.isLoggedIn(request)) {
-            request.getRequestDispatcher(PathStore.LOGGED_IN_HOME);
+            response.sendRedirect(RouteStore.LOGGED_IN_HOME);
             return;
         }
 

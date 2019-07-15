@@ -28,6 +28,7 @@ public final class RouteStore {
     public static final String REGISTER = "/register";
     public static final String SIGN_UP = "/signup";
     public static final String LOGOUT = "/logout";
+    public static final String LOGGED_IN_HOME = GAME;
 
     public static final String REGISTRATION_FORM = LOGIN + "#signup";
     public static final String LOGIN_FORM = LOGIN + "#login";

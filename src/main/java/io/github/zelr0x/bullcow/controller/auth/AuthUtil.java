@@ -1,6 +1,7 @@
 package io.github.zelr0x.bullcow.controller.auth;
 
 import io.github.zelr0x.bullcow.controller.util.PathStore;
+import io.github.zelr0x.bullcow.controller.util.RouteStore;
 import io.github.zelr0x.bullcow.controller.util.SessionAttrStore;
 
 import javax.servlet.ServletException;
@@ -31,8 +32,7 @@ final class AuthUtil {
         final HttpSession session = request.getSession();
         session.setAttribute(SessionAttrStore.IS_LOGGED_IN, SessionAttrStore.LOGGED_IN);
         request.getSession().setAttribute(SessionAttrStore.USER_ID, userId);
-        request.getRequestDispatcher(PathStore.LOGGED_IN_HOME)
-                .forward(request, response);
+        response.sendRedirect(RouteStore.LOGGED_IN_HOME);
     }
 
     /**
