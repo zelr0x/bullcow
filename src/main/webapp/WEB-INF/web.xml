@@ -19,6 +19,12 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     <param-value>Bulls and Cows</param-value>
   </context-param>
 
+  <!-- debug value means debug, any other value - production -->
+  <context-param>
+    <param-name>debug</param-name>
+    <param-value>debug</param-value>
+  </context-param>
+
   <filter-mapping>
     <filter-name>StaticFilter</filter-name>
     <url-pattern>/static/*</url-pattern>

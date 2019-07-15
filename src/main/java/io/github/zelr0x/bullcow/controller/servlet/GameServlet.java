@@ -26,10 +26,23 @@ import java.io.IOException;
                 RouteStore.GAME,
                 RouteStore.PLAY})
 public class GameServlet extends HttpServlet {
+    private boolean debug;
+
     private static final String GUESS_PARAM = "guess";
-    private static final boolean DEBUG = true;
     private static final String NEW_GAME_PARAM = "new";
     private static final String NEW_GAME_VALUE = "1";
+
+    /**
+     * Initializes Servlet. Runs only once.
+     *
+     * @throws ServletException if servlet could not be initialized.
+     */
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        debug = getServletContext().getInitParameter("debug")
+                .equalsIgnoreCase("debug");
+    }
 
     /**
      * Forwards to the game page.
@@ -86,7 +99,7 @@ public class GameServlet extends HttpServlet {
                 .getAttribute(SessionAttrStore.GAME_SESSION);
         final GameSession gameSession;
         if (gameSessionObj == null) {
-            final GameSession newGameSession = DEBUG
+            final GameSession newGameSession = debug
                     ? GameSession.forDebugging()
                     : new GameSession();
             request.getSession().setAttribute(
