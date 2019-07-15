@@ -1,0 +1,24 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/bullcow_db</property>
+        <property name="hibernate.connection.username">DB-USER-NAME-GOES-HERE</property>
+        <property name="hibernate.connection.password">DB-USER-PASSWORD-GOES-HERE</property>
+        
+        <property name="connection_pool_size">1</property>
+
+        <!-- Comment out for production (drops tables on start) -->
+        <property name="hbm2ddl.auto">create</property>
+
+        <property name="show_sql">true</property>
+
+        <mapping class="io.github.zelr0x.bullcow.model.User"/>
+        <mapping class="io.github.zelr0x.bullcow.model.Player"/>
+
+    </session-factory>
+</hibernate-configuration>
