@@ -15,30 +15,31 @@ public final class PlayerDto implements Serializable {
     private int totalGames;
     private double averageGuesses;
 
-    public static PlayerDto of(final long rank,
-                               final String name,
+    public static PlayerDto of(final String name,
                                final int totalGames,
                                final double averageGuesses) {
-        return new PlayerDto(rank, name, totalGames, averageGuesses);
+        return new PlayerDto(name, totalGames, averageGuesses);
     }
 
     public static PlayerDto of(final Player player) {
         return new PlayerDto(player);
     }
 
-    private PlayerDto(final long rank, final String name,
+    private PlayerDto(final String name,
                       final int totalGames, final double averageGuesses) {
-        this.rank = rank;
         this.name = name;
         this.totalGames = totalGames;
         this.averageGuesses = averageGuesses;
     }
 
     private PlayerDto(final Player player) {
-        this(player.getRank(),
-                player.getName(),
-                player.getTotalGames(),
-                player.getAverageGuesses());
+        this(player.getName(),
+             player.getTotalGames(),
+             player.getAverageGuesses());
+    }
+
+    public void setRank(final long rank) {
+        this.rank = rank;
     }
 
     public long getRank() {

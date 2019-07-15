@@ -18,4 +18,17 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     <param-name>gameName</param-name>
     <param-value>Bulls and Cows</param-value>
   </context-param>
+
+  <filter-mapping>
+    <filter-name>StaticFilter</filter-name>
+    <url-pattern>/static/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>ApiFilter</filter-name>
+    <url-pattern>/api/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>

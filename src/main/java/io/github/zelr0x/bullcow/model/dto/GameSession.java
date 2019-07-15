@@ -8,12 +8,12 @@ import io.github.zelr0x.bullcow.util.NumberParseException;
 import java.io.Serializable;
 
 /**
- * Encapsulates game session info.
+ * GameSession encapsulates game session info in a way suitable for transfer.
  */
 public final class GameSession implements Serializable {
     private static final long serialVersionUID = 145614581L;
 
-    private static transient final boolean REPEAT_AS_NEW = false;
+    private static final transient boolean REPEAT_AS_NEW = false;
 
     @com.google.gson.annotations.Expose(serialize = false)
     private Game game;
@@ -29,9 +29,11 @@ public final class GameSession implements Serializable {
     /**
      * Creates debug game session with target number always set to 1234.
      *
+     * @return a debug game session with target number always set to 1234.
      */
+    @SuppressWarnings("checkstyle:MagicNumber")
     public static GameSession forDebugging() {
-        return new GameSession(new Game(new int[]{1,2,3,4}));
+        return new GameSession(new Game(new int[]{1, 2, 3, 4}));
     }
 
     public GuessDto makeGuess(final String guessString) {

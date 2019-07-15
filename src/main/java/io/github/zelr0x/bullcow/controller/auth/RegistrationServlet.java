@@ -17,12 +17,25 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * RegistrationServlet handles user registration.
+ */
 @WebServlet(
         name = "RegistrationServlet",
         urlPatterns = {
                 RouteStore.REGISTER,
                 RouteStore.SIGN_UP})
 public class RegistrationServlet extends HttpServlet {
+    /**
+     * Redirects to registration page.
+     *
+     * @param request an HttpServletRequest object that contains
+     *                the request the client has made of the servlet.
+     * @param response an HttpServletResponse object that contains
+     *                 the response the servlet sends to the client.
+     * @throws IOException if an I/O error is detected when handling the request.
+     * @throws ServletException if the request could not be handled.
+     */
     @Override
     protected void doGet(final HttpServletRequest request,
                          final HttpServletResponse response)
@@ -33,6 +46,17 @@ public class RegistrationServlet extends HttpServlet {
                 .forward(request, response);
     }
 
+    /**
+     * Handles user registration.
+     * If successful, logs in the freshly created user.
+     *
+     * @param request an HttpServletRequest object that contains
+     *                the request the client has made of the servlet.
+     * @param response an HttpServletResponse object that contains
+     *                 the response the servlet sends to the client.
+     * @throws IOException if an I/O error is detected when handling the request.
+     * @throws ServletException if the request could not be handled.
+     */
     @Override
     protected void doPost(final HttpServletRequest request,
                           final HttpServletResponse response)

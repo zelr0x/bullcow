@@ -10,9 +10,15 @@ import javax.persistence.NoResultException;
 import java.util.Optional;
 
 /**
- * Encapsulates DB access for User entity.
+ * UserDao encapsulates DB access for User entity.
  */
 public final class UserDao implements IUserDao {
+    /**
+     * Tries to retrieve a User with a specified name from a DB.
+     *
+     * @param name the name of the target user.
+     * @return a User object or nothing.
+     */
     @Override
     public Optional<User> getUser(final String name) {
         User user;
@@ -30,6 +36,14 @@ public final class UserDao implements IUserDao {
         return Optional.of(user);
     }
 
+    /**
+     * Tries to add a user to a DB.
+     *
+     * @param target a UserDto object containing the information
+     *               about the new user.
+     * @return a Long object containing the ID of a freshly created user
+     * or nothing if user creation was not successful.
+     */
     @Override
     public Optional<Long> addUser(final UserDto target) {
         Transaction tx = null;

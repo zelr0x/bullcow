@@ -1,6 +1,5 @@
 package io.github.zelr0x.bullcow.service;
 
-import io.github.zelr0x.bullcow.model.Player;
 import io.github.zelr0x.bullcow.model.dto.PlayerDto;
 import io.github.zelr0x.bullcow.model.dto.StatDifference;
 import io.github.zelr0x.bullcow.util.JsonSerializer;
@@ -18,29 +17,30 @@ public interface IPlayerService {
 
     /**
      * Returns players within a specified range.
-     * @param firstInclusive one-based index of the first player (inclusive)
-     * @param lastExclusive one-based index of the last player (exclusive)
-     * @return list of users within a specified range
+     *
+     * @param firstInclusive one-based index of the first player (inclusive).
+     * @param lastExclusive one-based index of the last player (exclusive).
+     * @return list of users within a specified range.
      */
     Optional<List<? extends PlayerDto>> getRanked(
             int firstInclusive, int lastExclusive);
 
     /**
      * Returns 25 users.
-     * @return list of 25 users
+     *
+     * @return list of 25 users.
      */
     default Optional<List<? extends PlayerDto>> getRanked() {
         return getRanked(DEFAULT_FIRST, DEFAULT_LAST);
     }
 
-    Player updateStatistics(final Long userId, final StatDifference statDifference);
-
     /**
      * Returns a JSON array of players within a specified range
      * serialized to a JSON object.
-     * @param first the index of the first player to return
-     * @param last the index of the last player to return
-     * @return a JSON array of players within a specified range
+     *
+     * @param first the index of the first player to return.
+     * @param last the index of the last player to return.
+     * @return a JSON array of players within a specified range.
      */
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     static String getPlayersJson(final Optional<Integer> first,
@@ -57,9 +57,19 @@ public interface IPlayerService {
     /**
      * Returns a JSON array of players within a default range
      * serialized to a JSON object.
+     *
      * @return a JSON array of players within a default range
      */
     static String getPlayersJson() {
         return getPlayersJson(Optional.empty(), Optional.empty());
     }
+
+    /**
+     * Saves or updates stat difference for the player with the specified id.
+     * It always adds stat difference.
+     *
+     * @param playerId the id of the target player.
+     * @param statDifference the difference in stats of that player.
+     */
+    void updateStatistics(Long playerId, StatDifference statDifference);
 }

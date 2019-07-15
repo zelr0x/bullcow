@@ -3,7 +3,8 @@ package io.github.zelr0x.bullcow.model.dto;
 import java.io.Serializable;
 
 /**
- * Encapsulates difference in player statistics in a way suitable for transfer.
+ * StatDifference encapsulates the difference
+ * in player statistics in a way suitable for transfer.
  */
 public final class StatDifference implements Serializable {
     private static final long serialVersionUID = 24561931L;

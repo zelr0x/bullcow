@@ -3,7 +3,7 @@ package io.github.zelr0x.bullcow.model.game;
 import java.io.Serializable;
 
 /**
- * Encapsulates guess.
+ * Guess encapsulates the guess in a bulls and cows game.
  */
 public final class Guess implements Serializable {
     private static final long serialVersionUID = 9938476665L;
@@ -12,7 +12,8 @@ public final class Guess implements Serializable {
 
     /**
      * Constructs guess from a specified String.
-     * @param guess a string hopefully containing digits of the guess
+     *
+     * @param guess a string hopefully containing digits of the guess.
      */
     public Guess(final String guess) {
         this.guess = guess.trim();
@@ -22,7 +23,8 @@ public final class Guess implements Serializable {
      * Returns String representation of a guess suitable for further
      * processing. Formatted without knowing of a game target length so
      * further formatting is required.
-     * @return String representation of a guess
+     *
+     * @return String representation of a guess.
      */
     public String getGuess() {
         return guess;

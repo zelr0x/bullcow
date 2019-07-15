@@ -1,5 +1,8 @@
 package io.github.zelr0x.bullcow.controller.util;
 
+/**
+ * PathStore stores various paths used throughout the application.
+ */
 public final class PathStore {
     private static final String JSP_ROOT = "/WEB-INF/jsp";
     public static final String HOME_PAGE = "/index.jsp";
@@ -10,4 +13,11 @@ public final class PathStore {
     public static final String LOGGED_IN_HOME = GAME_PAGE;
 
     public static final String ERROR_PAGE = JSP_ROOT + "/error.jsp";
+
+    /**
+     * Prevents instantiation.
+     */
+    private PathStore() {
+        throw new AssertionError();
+    }
 }

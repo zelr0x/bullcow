@@ -1,9 +1,7 @@
 package io.github.zelr0x.bullcow.controller.auth;
 
 import io.github.zelr0x.bullcow.controller.util.PathStore;
-import io.github.zelr0x.bullcow.controller.util.RouteStore;
 import io.github.zelr0x.bullcow.controller.util.SessionAttrStore;
-import io.github.zelr0x.bullcow.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * AuthUtil contains utility methods related to authentication.
+ */
 final class AuthUtil {
+    /**
+     * Performs all the steps necessary to log in a user.
+     *
+     * @param request an HttpServletRequest object that contains
+     *                the request the client has made of the servlet.
+     * @param response an HttpServletResponse object that contains
+     *                 the response the servlet sends to the client.
+     * @param userId a Long object containing the id of the user.
+     * @throws IOException if an I/O error is detected when handling the request.
+     * @throws ServletException if the request could not be handled.
+     */
     static void logUserIn(final HttpServletRequest request,
                           final HttpServletResponse response,
                           final Long userId)
@@ -23,8 +35,20 @@ final class AuthUtil {
                 .forward(request, response);
     }
 
+    /**
+     * Forwards a user to error page.
+     * empty return statement is required if it is used in the middle
+     * of the controller's method.
+     *
+     * @param request an HttpServletRequest object that contains
+     *                the request the client has made of the servlet.
+     * @param response an HttpServletResponse object that contains
+     *                 the response the servlet sends to the client.
+     * @throws IOException if an I/O error is detected when handling the request.
+     * @throws ServletException if the request could not be handled.
+     */
     static void forwardToError(final HttpServletRequest request,
-                        final HttpServletResponse response)
+                               final HttpServletResponse response)
             throws ServletException, IOException {
         final String loginErrorMsg = "Could not log in";
         request.setAttribute(AuthParamStore.ERROR, loginErrorMsg);
@@ -33,16 +57,12 @@ final class AuthUtil {
     }
 
     /**
-     * Performs whitelist check and redundant blacklist check if needed.
-     * @param uri uri to check
-     * @return true if uri conforms to white- and black- list rules,
-     * false otherwise.
+     * Checks if a user that issued a specified request is logged in.
+     *
+     * @param request an HttpServletRequest object that contains
+     *                the request the client has made of the servlet.
+     * @return true if the user is logged in, false otherwise
      */
-    static boolean isAuthNotRequired(final String uri) {
-        return RouteStore.NO_AUTH_ENDPOINTS.stream().anyMatch(uri::equals)
-                || RouteStore.NO_AUTH_ROUTE_STARTS.stream().anyMatch(uri::startsWith);
-    }
-
     static boolean isLoggedIn(final HttpServletRequest request) {
         final HttpSession session = request.getSession(false);
         if (session != null) {
@@ -53,5 +73,12 @@ final class AuthUtil {
                     && isLoggedIn.equals(SessionAttrStore.LOGGED_IN);
         }
         return false;
+    }
+
+    /**
+     * Prevents instantiation.
+     */
+    private AuthUtil() {
+        throw new AssertionError();
     }
 }

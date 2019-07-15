@@ -14,10 +14,20 @@ public class BaseEntity implements Serializable {
     @GeneratedValue(generator = Constants.ID_GENERATOR)
     private Long id;
 
+    /**
+     * Get an ID of an entity.
+     *
+     * @return a Long object containing the ID of the entity.
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Set an ID of an entity.
+     *
+     * @param id a Long object containing the ID of the entity.
+     */
     public void setId(final Long id) {
         this.id = id;
     }

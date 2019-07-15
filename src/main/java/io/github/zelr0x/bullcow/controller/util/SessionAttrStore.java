@@ -1,5 +1,8 @@
 package io.github.zelr0x.bullcow.controller.util;
 
+/**
+ * SessionAttrStore stores session parameters.
+ */
 public final class SessionAttrStore {
     public static final String USER_ID = "user_id";
 
@@ -7,4 +10,11 @@ public final class SessionAttrStore {
     public static final Boolean LOGGED_IN = true;
 
     public static final String GAME_SESSION = "game_session";
+
+    /**
+     * Prevents instantiation.
+     */
+    private SessionAttrStore() {
+        throw new AssertionError();
+    }
 }

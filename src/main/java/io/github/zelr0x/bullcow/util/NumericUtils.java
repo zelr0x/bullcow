@@ -7,16 +7,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * Contains utility methods for working with numbers and numeric arrays
- * in base10 numeric system.
+ * NumericUtils contains utility methods for working
+ * with numbers and numeric arrays in decimal numeral system.
  */
 public final class NumericUtils {
     private static final int RADIX = 10;
 
     /**
      * Tries to convert a String representation of a number to an int.
-     * @param s a String to convert
-     * @return an Optional holding the resulting Integer or nothing
+     *
+     * @param s a String to convert.
+     * @return an Optional holding the resulting Integer or nothing.
      */
     public static Optional<Integer> parseInt(final String s) {
         Optional<Integer> result;
@@ -31,10 +32,11 @@ public final class NumericUtils {
     /**
      * Tries to convert a String representation of a number to
      * an array of digits in that number.
-     * @param number a string representation of the number
-     * @return an array of digits of the number
+     *
+     * @param number a string representation of the number.
+     * @return an array of digits of the number.
      * @throws NumberParseException if the number contains
-     * non-numeric data
+     * non-numeric data.
      */
     public static int[] getDigits(final String number)
             throws NumberParseException {
@@ -48,9 +50,10 @@ public final class NumericUtils {
 
     /**
      * Returns an array of digits of a specified number.
-     * @param number the target number
-     * @param length a length of a target array
-     * @return an array of digits of the number
+     *
+     * @param number the target number.
+     * @param length a length of a target array.
+     * @return an array of digits of the number.
      */
     public static int[] getDigits(final int number, final int length) {
         final int[] result = new int[length];
@@ -65,11 +68,12 @@ public final class NumericUtils {
      * Validates the length of an array and returns it back
      * prefixed with zeros if the initial length is less than
      * the specified length.
-     * @param digits an initial array
-     * @param targetLength  length of a target array
-     * @return a normalized version of the array
+     *
+     * @param digits an initial array.
+     * @param targetLength  length of a target array.
+     * @return a normalized version of the array.
      * @throws NumberParseException if initial array length
-     * is greater than the targetLength
+     * is greater than the targetLength.
      */
     public static int[] prefixNormalize(final int[] digits,
                                         final int targetLength)
@@ -87,9 +91,10 @@ public final class NumericUtils {
     /**
      * Creates array containing all the elements of a specified
      * array padded with a specified number of zeros at the beginning.
-     * @param arr an array to pad with zeros
-     * @param amount a padding length
-     * @return the input array padded with zeros at the beginning
+     *
+     * @param arr an array to pad with zeros.
+     * @param amount a padding length.
+     * @return the input array padded with zeros at the beginning.
      */
     public static int[] prefixZeros(final int[] arr,
                                     final int amount) {
@@ -101,8 +106,9 @@ public final class NumericUtils {
 
     /**
      * Generates a number and returns an array of its digits.
-     * @param length the length of the number to generate in digits
-     * @return an array consisting of digits of a target number
+     *
+     * @param length the length of the number to generate in digits.
+     * @return an array consisting of digits of a target number.
      */
     public static int[] generateDistinctDigitNumber(final int length) {
         final ThreadLocalRandom random = ThreadLocalRandom.current();
@@ -116,9 +122,10 @@ public final class NumericUtils {
     /**
      * Returns string representation of a specified array
      * delimited with a specified delimiter.
-     * @param arr an array of int
-     * @param delimiter a delimiter
-     * @return String of all items in arr delimited by delimiter
+     *
+     * @param arr an array of int.
+     * @param delimiter a delimiter.
+     * @return String of all items in arr delimited by delimiter.
      */
     public static String joinIntArray(final int[] arr,
                                       final String delimiter) {
@@ -130,8 +137,9 @@ public final class NumericUtils {
     /**
      * Returns string representation of a specified array
      * delimited with no delimiter.
-     * @param arr an array of int
-     * @return String of all items in arr
+     *
+     * @param arr an array of int.
+     * @return String of all items in arr.
      */
     public static String joinIntArray(final int[] arr) {
         return joinIntArray(arr, "");
@@ -140,11 +148,12 @@ public final class NumericUtils {
     /**
      * Prefixes array with zeros if needed. Joins all its contents
      * into a string with no delimiter.
-     * @param arr an array of int
-     * @param targetLength the length of the target array
-     * @return Formatted String of all items in arr
+     *
+     * @param arr an array of int.
+     * @param targetLength the length of the target array.
+     * @return Formatted String of all items in arr.
      * @throws NumberParseException if initial array length
-     * is greater than the targetLength
+     * is greater than the targetLength.
      */
     public static String prefixJoinIntArray(final int[] arr,
                                             final int targetLength)
@@ -153,7 +162,7 @@ public final class NumericUtils {
     }
 
     /**
-     * Restricts instantiation.
+     * Prevents instantiation.
      */
     private NumericUtils() {
         throw new AssertionError();

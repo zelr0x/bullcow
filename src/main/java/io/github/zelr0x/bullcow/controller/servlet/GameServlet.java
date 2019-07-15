@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * GameServlet handles requests to /game.
+ */
 @WebServlet(
         name = "GameServlet",
         urlPatterns = {
@@ -28,6 +31,16 @@ public class GameServlet extends HttpServlet {
     private static final String NEW_GAME_PARAM = "new";
     private static final String NEW_GAME_VALUE = "1";
 
+    /**
+     * Forwards to the game page.
+     *
+     * @param request an HttpServletRequest object that contains
+     *                the request the client has made of the servlet.
+     * @param response an HttpServletResponse object that contains
+     *                 the response the servlet sends to the client.
+     * @throws IOException if an I/O error is detected when handling the request.
+     * @throws ServletException if the request could not be handled.
+     */
     @Override
     protected void doGet(final HttpServletRequest request,
                          final HttpServletResponse response)
@@ -36,6 +49,16 @@ public class GameServlet extends HttpServlet {
                 .forward(request, response);
     }
 
+    /**
+     * Controls the lifecycle of game sessions.
+     *
+     * @param request an HttpServletRequest object that contains
+     *                the request the client has made of the servlet.
+     * @param response an HttpServletResponse object that contains
+     *                 the response the servlet sends to the client.
+     * @throws IOException if an I/O error is detected when handling the request.
+     * @throws ServletException if the request could not be handled.
+     */
     @Override
     protected void doPost(final HttpServletRequest request,
                           final HttpServletResponse response)

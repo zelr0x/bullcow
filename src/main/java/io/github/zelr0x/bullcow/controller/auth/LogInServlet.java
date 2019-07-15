@@ -16,12 +16,25 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * LogInServlet handles user log-in.
+ */
 @WebServlet(
         name = "LogInServlet",
         urlPatterns = {
                 RouteStore.LOGIN,
                 RouteStore.SIGN_IN})
-public class LogInServlet extends HttpServlet {
+public final class LogInServlet extends HttpServlet {
+    /**
+     * Returns log-in page.
+     *
+     * @param request an HttpServletRequest object that contains
+     *                the request the client has made of the servlet.
+     * @param response an HttpServletResponse object that contains
+     *                 the response the servlet sends to the client.
+     * @throws IOException if an I/O error is detected when handling the request.
+     * @throws ServletException if the request could not be handled.
+     */
     @Override
     protected void doGet(final HttpServletRequest request,
                          final HttpServletResponse response)
@@ -42,6 +55,16 @@ public class LogInServlet extends HttpServlet {
                 : RouteStore.LOGIN_FORM);
     }
 
+    /**
+     * Handles user log-in request.
+     *
+     * @param request an HttpServletRequest object that contains
+     *                the request the client has made of the servlet.
+     * @param response an HttpServletResponse object that contains
+     *                 the response the servlet sends to the client.
+     * @throws IOException if an I/O error is detected when handling the request.
+     * @throws ServletException if the request could not be handled.
+     */
     @Override
     protected void doPost(final HttpServletRequest request,
                           final HttpServletResponse response)

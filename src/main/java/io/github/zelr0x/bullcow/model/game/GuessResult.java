@@ -14,7 +14,8 @@ public final class GuessResult implements Serializable {
 
     /**
      * Returns an empty GuessResult (0 bulls, 0 cows, solved = false).
-     * @return an empty GuessResult
+     *
+     * @return an empty GuessResult.
      */
     public static GuessResult ofEmpty() {
         return EmptyGuessResultHolder.INSTANCE;
@@ -22,7 +23,8 @@ public final class GuessResult implements Serializable {
 
     /**
      * Returns a number of "bulls" - correctly guessed digits.
-     * @return a number of correctly guessed digits
+     *
+     * @return a number of correctly guessed digits.
      */
     int getBulls() {
         return bulls;
@@ -31,8 +33,9 @@ public final class GuessResult implements Serializable {
     /**
      * Returns a number of "cows" - incorrectly positioned digits
      * present in a target number.
+     *
      * @return a number of incorrectly positioned digits
-     * present in a target number
+     * present in a target number.
      */
     int getCows() {
         return cows;
@@ -40,7 +43,8 @@ public final class GuessResult implements Serializable {
 
     /**
      * Checks if the guess is the winning one.
-     * @return true if this is the winning guess, false otherwise
+     *
+     * @return true if this is the winning guess, false otherwise.
      */
     public boolean isWinning() {
         return solved;
@@ -49,7 +53,8 @@ public final class GuessResult implements Serializable {
     /**
      * Returns String representation of a GuessResult.
      * Includes indication of all digits guessed correctly.
-     * @return String representation of a GuessResult
+     *
+     * @return String representation of a GuessResult.
      */
     @Override
     public String toString() {
@@ -69,16 +74,18 @@ public final class GuessResult implements Serializable {
 
         /**
          * Creates GuessResult.Builder for a specified total number of digits.
-         * @param total a total number of digits
+         *
+         * @param total a total number of digits.
          */
         Builder(final int total) {
             this.total = total;
         }
 
         /**
-         * Specifies an amount of digits guessed correctly.
-         * @param setBulls an amount of digits guessed correctly
-         * @return GuessResult.Builder
+         * Specifies the amount of digits guessed correctly.
+         *
+         * @param setBulls an amount of digits guessed correctly.
+         * @return a GuessResult.Builder object.
          */
         Builder bulls(final int setBulls) {
             this.bulls = setBulls;
@@ -87,9 +94,10 @@ public final class GuessResult implements Serializable {
 
         /**
          * Specifies an amount of digits guessed correctly.
-         * @param setCows an amount of guessed digits that are present
-         *                in a number but positioned incorrectly
-         * @return GuessResult.Builder
+         *
+         * @param setCows the amount of guessed digits that are present
+         *                in a number but positioned incorrectly.
+         * @return a GuessResult.Builder object.
          */
         Builder cows(final int setCows) {
             this.cows = setCows;
@@ -99,7 +107,8 @@ public final class GuessResult implements Serializable {
         /**
          * Creates a GuessResult object representing the result
          * of a given guess.
-         * @return an result of a guess
+         *
+         * @return the result of the guess.
          */
         GuessResult build() {
             return new GuessResult(this);
@@ -108,8 +117,9 @@ public final class GuessResult implements Serializable {
 
     /**
      * Constructs a GuessResult object with a specified builder.
+     *
      * @param builder a Builder object used to specify
-     *                the parameters of the result
+     *                the parameters of the result.
      */
     private GuessResult(final Builder builder) {
         this.bulls = builder.bulls;

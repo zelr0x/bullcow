@@ -29,10 +29,11 @@ public final class Game implements Serializable {
      * Evaluates guess. Each bull represents a correctly positioned
      * and correctly guessed digit. Each cow represents an incorrectly
      * positioned digit that is present in the target number.
-     * @param guess a Guess
-     * @return GuessResult object containing the evaluation of this guess
+     *
+     * @param guess a Guess.
+     * @return GuessResult object containing the evaluation of this guess.
      * @throws NumberParseException (one of its subclasses)
-     * if guess is of incorrect size or contains malformed data
+     * if guess is of incorrect size or contains malformed data.
      */
     public GuessResult checkGuess(final Guess guess)
             throws NumberParseException {
@@ -54,8 +55,14 @@ public final class Game implements Serializable {
     /**
      * {@link #checkGuess(Guess)} helper method.
      * Suitable for testing and required for production.
-     * @param guess the digits of the guess
-     * @return GuessResult object containing the evaluation of this guess
+     *
+     * If the digits on the same position match, increments bull counter.
+     * All non-bull digits of a target number are added to a set.
+     * Distinct filtering of the guess allows computing cows by
+     * counting all the matches with the set.
+     *
+     * @param guess the digits of the guess.
+     * @return GuessResult object containing the evaluation of this guess.
      */
     GuessResult checkGuess(final int[] guess) {
         int bulls = 0;
@@ -79,7 +86,8 @@ public final class Game implements Serializable {
 
     /**
      * Returns the length of the target number of this game instance.
-     * @return the length of the target number
+     *
+     * @return the length of the target number.
      */
     public int getTargetLength() {
         return targetLength;
@@ -87,7 +95,8 @@ public final class Game implements Serializable {
 
     /**
      * Starts a game session for a specified target number length.
-     * @param targetLength an amount of digits in a target number
+     *
+     * @param targetLength an amount of digits in a target number.
      */
     public Game(final int targetLength) {
         this.targetLength = (targetLength <= MAX_LENGTH
@@ -108,6 +117,7 @@ public final class Game implements Serializable {
     /**
      * Starts a game session for a specified target number.
      * Made for testing purposes.
+     *
      * @param target the digits of a target number
      */
     public Game(final int[] target) {
@@ -118,7 +128,8 @@ public final class Game implements Serializable {
     /**
      * Returns the digits of a target number.
      * Made for testing purposes.
-     * @return the digits of a target number
+     *
+     * @return the digits of a target number.
      */
     int[] getTargetDigits() {
         return targetDigits;

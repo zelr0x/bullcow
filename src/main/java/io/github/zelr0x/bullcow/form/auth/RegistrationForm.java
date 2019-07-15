@@ -10,9 +10,9 @@ public final class RegistrationForm {
 
     /**
      * Constructs a registration form.
-     * @param userName the name of the user
-     * @param password the password of the user
-     * @param passwordRepeat the password of the user (repeated)
+     * @param userName the name of the user.
+     * @param password the password of the user.
+     * @param passwordRepeat the password of the user (repeated).
      */
     public RegistrationForm(final String userName, final String password,
                             final String passwordRepeat) {
@@ -21,14 +21,26 @@ public final class RegistrationForm {
         this.passwordRepeat = passwordRepeat;
     }
 
+    /**
+     * Get the contents of a username field from a form.
+     * @return the username contained in this form.
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * Get the contents of a password field from a form.
+     * @return the password contained in this form.
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Get the contents of a password repeat field from a form.
+     * @return the password repeat contained in this form.
+     */
     public String getPasswordRepeat() {
         return passwordRepeat;
     }

@@ -3,6 +3,9 @@ package io.github.zelr0x.bullcow.model.dao;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+/**
+ * HibernateUtil is a utility class storing Hibernate SessionFactory.
+ */
 final class HibernateUtil {
     private static SessionFactory sessionFactory;
 
@@ -17,7 +20,19 @@ final class HibernateUtil {
         }
     }
 
+    /**
+     * Get SessionFactory object.
+     *
+     * @return a SessionFactory object.
+     */
     static SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+
+    /**
+     * Prevents instantiation.
+     */
+    private HibernateUtil() {
+        throw new AssertionError();
     }
 }

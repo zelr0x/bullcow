@@ -4,7 +4,6 @@ import io.github.zelr0x.bullcow.controller.util.RouteStore;
 import io.github.zelr0x.bullcow.service.IPlayerService;
 import io.github.zelr0x.bullcow.util.NumericUtils;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +12,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Api endpoint returning JSON of Player objects.
+ * GetRatingServlet controls an api endpoint.
+ * It is designed to return JSON object containing
+ * only one property - an array of Player objects.
  */
 @WebServlet(
         name = "GetRatingServlet",
@@ -22,10 +23,13 @@ import java.util.Optional;
                 RouteStore.API_PUB_ROOT + "get/rankings"})
 public class GetRatingServlet extends HttpServlet {
     /**
-     * Returns application/json of Player objects
-     * @param request a request
-     * @param response a response
-     * @throws IOException
+     * Returns application/json of Player objects.
+     *
+     * @param request an HttpServletRequest object that contains
+     *                the request the client has made of the servlet.
+     * @param response an HttpServletResponse object that contains
+     *                 the response the servlet sends to the client.
+     * @throws IOException if an I/O error is detected when handling the request.
      */
     @Override
     protected void doGet(final HttpServletRequest request,

@@ -8,15 +8,33 @@ import io.github.zelr0x.bullcow.service.UserService;
 
 import java.util.Optional;
 
-public class LoginValidator {
+/**
+ * LoginValidator validates LoginForm objects.
+ */
+public final class LoginValidator {
     private IUserService userService = new UserService();
 
+    /**
+     * Checks if a user with credentials contained in a specified
+     * LoginForm object is valid.
+     *
+     * @param form a LoginForm object containing user credentials.
+     * @return a ValidationResult object containing the results of the check.
+     */
     public ValidationResult validate(final LoginForm form) {
         final ValidationResult result = new ValidationResult();
         checkCredentials(form, result);
         return result;
     }
 
+    /**
+     * Checks if a user with credentials contained in a specified
+     * LoginForm object is registered in the application.
+     *
+     * @param form a LoginForm object containing user credentials.
+     * @param result a ValidationResult object used to store
+     *               a result of the check.
+     */
     private void checkCredentials(final LoginForm form,
                                   final ValidationResult result) {
         final Optional<User> user = userService.getUser(

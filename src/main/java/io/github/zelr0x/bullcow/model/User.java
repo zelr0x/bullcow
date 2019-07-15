@@ -2,15 +2,15 @@ package io.github.zelr0x.bullcow.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * User entity.
+ * A User entity.
  */
+@SuppressWarnings("checkstyle:all")
 @Entity
 @Table(name = "Users")
 public final class User extends BaseEntity
@@ -21,7 +21,8 @@ public final class User extends BaseEntity
     // Hibernate's @Cascade is required when hibernate-specific methods
     // session.save(), session.update() or session.saveOrUpdate() are used
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @org.hibernate.annotations.Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @org.hibernate.annotations.Cascade(
+            org.hibernate.annotations.CascadeType.ALL)
     private Player player;
 
     private String name;

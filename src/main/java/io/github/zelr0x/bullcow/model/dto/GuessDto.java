@@ -6,7 +6,7 @@ import io.github.zelr0x.bullcow.model.game.GuessResult;
 import java.io.Serializable;
 
 /**
- * GuessDto encapsulates guess information.
+ * GuessDto encapsulates guess information in a way suitable for transfer.
  */
 public final class GuessDto implements Serializable {
     private static final long serialVersionUID = 312130008L;
@@ -18,13 +18,13 @@ public final class GuessDto implements Serializable {
     private final boolean isWinning;
 
     public static GuessDto of(final int turn, final Guess guess,
-                               final GuessResult result, final String error) {
+                              final GuessResult result, final String error) {
         return new GuessDto(turn, guess, result, error);
     }
 
     static GuessDto ofEmpty(final int turn,
-                                   final Guess guess,
-                                   final String error) {
+                            final Guess guess,
+                            final String error) {
         return new GuessDto(turn, guess, GuessResult.ofEmpty(), error);
     }
 

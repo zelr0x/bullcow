@@ -8,15 +8,17 @@ public final class GuessForm {
 
     /**
      * Constructs a guess object.
-     * @param guess the guess
+     *
+     * @param guess the guess.
      */
     public GuessForm(final String guess) {
         this.guess = guess;
     }
 
     /**
-     * Returns a string representation of the guess.
-     * @return the guess as a String
+     * Returns a String object containing the guess.
+     *
+     * @return a String object containing the guess.
      */
     public String getGuess() {
         return guess;

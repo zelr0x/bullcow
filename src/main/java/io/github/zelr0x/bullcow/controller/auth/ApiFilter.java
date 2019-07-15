@@ -13,17 +13,36 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
- * Filters requests to API endpoints.
+ * ApiFilter filters requests to API endpoints.
+ * Currently allows /api/pub/* and filter out everything else.
  */
-@WebFilter(
-        filterName = "ApiFilter",
-        urlPatterns = RouteStore.API_ROOT + "*")
+@WebFilter(filterName = "ApiFilter")
 public final class ApiFilter implements Filter {
+    /**
+     * Called by the web container to indicate to a filter
+     * that it is being placed into service.
+     *
+     * @param filterConfig A filter configuration object used by
+     *                     a servlet container to pass information
+     *                     to a filter during initialization.
+     */
     @Override
     public void init(final FilterConfig filterConfig) {
 
     }
 
+    /**
+     * Allows all requests to /api/pub.
+     *
+     * @param servletRequest an HttpServletRequest object that contains
+     *                       the request the client has made of the servlet.
+     * @param servletResponse an HttpServletResponse object that contains
+     *                        the response the servlet sends to the client.
+     * @param filterChain a FilterChain object giving a view into the
+     *                    invocation chain of a filtered request for a resource.
+     * @throws IOException if an I/O error is detected when handling the request.
+     * @throws ServletException if the request could not be handled.
+     */
     @Override
     public void doFilter(final ServletRequest servletRequest,
                          final ServletResponse servletResponse,
@@ -40,6 +59,10 @@ public final class ApiFilter implements Filter {
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
+    /**
+     * Called by the web container to indicate to a filter
+     * that it is being taken out of service.
+     */
     @Override
     public void destroy() {
 

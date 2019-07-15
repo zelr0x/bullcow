@@ -9,18 +9,25 @@ import io.github.zelr0x.bullcow.model.dto.GuessDto;
 import java.util.List;
 
 /**
- * Encapsulates JSON serialization.
+ * JsonSerializer encapsulates JSON serialization.
  */
 public final class JsonSerializer {
+    /**
+     * Serializes a specified GuessDto to a JSON object.
+     * @param guessDto a GuessDto object to serialize.
+     * @return JSON representation of a specified GuessDto object
+     */
     public static String serialize(final GuessDto guessDto) {
         return Holder.GSON.toJson(guessDto);
     }
 
     /**
-     * Serializes list to JSON object containing it as an array
+     * Serializes a specified List to a JSON object.
+     * The resulting objects contains the list as an array
      * with a specified name: { "propertyName": [...list] }
+     *
      * @param propertyName the name of a resulting json array
-     * @param list a list to serialize
+     * @param list a List object to serialize
      * @return JSON object containing the list as an array
      */
     public static String serialize(final String propertyName,
@@ -41,7 +48,7 @@ public final class JsonSerializer {
     }
 
     /**
-     * Restricts instantiation.
+     * Prevents instantiation.
      */
     private JsonSerializer() {
         throw new AssertionError();

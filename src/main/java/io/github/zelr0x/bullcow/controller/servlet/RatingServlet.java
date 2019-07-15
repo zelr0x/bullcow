@@ -24,6 +24,13 @@ public class RatingServlet extends HttpServlet {
 
     /**
      * Forwards GET requests to an according JSP page.
+     *
+     * @param request an HttpServletRequest object that contains
+     *                the request the client has made of the servlet.
+     * @param response an HttpServletResponse object that contains
+     *                 the response the servlet sends to the client.
+     * @throws IOException if an I/O error is detected when handling the request.
+     * @throws ServletException if the request could not be handled.
      */
     @Override
     protected void doGet(final HttpServletRequest request,
@@ -32,6 +39,16 @@ public class RatingServlet extends HttpServlet {
         process(request, response);
     }
 
+    /**
+     * Forwards POST requests to an according JSP page.
+     *
+     * @param request an HttpServletRequest object that contains
+     *                the request the client has made of the servlet.
+     * @param response an HttpServletResponse object that contains
+     *                 the response the servlet sends to the client.
+     * @throws IOException if an I/O error is detected when handling the request.
+     * @throws ServletException if the request could not be handled.
+     */
     @Override
     protected void doPost(final HttpServletRequest request,
                           final HttpServletResponse response)
@@ -39,6 +56,16 @@ public class RatingServlet extends HttpServlet {
         process(request, response);
     }
 
+    /**
+     * Forwards the requests to an according JSP page.
+     *
+     * @param request an HttpServletRequest object that contains
+     *                the request the client has made of the servlet.
+     * @param response an HttpServletResponse object that contains
+     *                 the response the servlet sends to the client.
+     * @throws IOException if an I/O error is detected when handling the request.
+     * @throws ServletException if the request could not be handled.
+     */
     private void process(final HttpServletRequest request,
                          final HttpServletResponse response)
             throws ServletException, IOException {

@@ -5,7 +5,7 @@ import io.github.zelr0x.bullcow.model.User;
 import java.io.Serializable;
 
 /**
- * Encapsulates User entity in a way suitable for transfer.
+ * UserDto encapsulates User entity in a way suitable for transfer.
  */
 public final class UserDto implements Serializable {
     private static final long serialVersionUID = 112117064328L;
