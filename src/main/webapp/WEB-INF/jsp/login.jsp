@@ -12,6 +12,9 @@
     <jsp:attribute name="headExtraInternal">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/login.css"/>
     </jsp:attribute>
+    <jsp:attribute name="header">
+        <%@ include file="../fragments/home-button.jspf"%>
+    </jsp:attribute>
     <jsp:attribute name="main">
         <!-- https://codepen.io/ehermanson/pen/KwKWEv -->
         <div class="form">
