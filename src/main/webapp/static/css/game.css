@@ -96,5 +96,10 @@
 }
 
 #history-table td:nth-of-type(3) {
-    min-width: 8vw;
+    text-align: center;
+}
+
+#history-table td:nth-of-type(3) {
+    min-width: 135px;
+    text-align: center;
 }

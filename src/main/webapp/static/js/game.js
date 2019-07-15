@@ -33,7 +33,7 @@ function addHistoryEntry(turn, guess, result) {
         makeVisible(historyTable);
     }
 
-    resultDiv.innerText = result;
+    printMain(result);
 
     const row = historyBody.insertRow(0);
     const turnCell = insertNumericCell(row, 0);
@@ -45,45 +45,24 @@ function addHistoryEntry(turn, guess, result) {
     resultCell.innerText = result;
 }
 
-function insertNumericCell(rowElement, cellIndex) {
-    const cell = rowElement.insertCell(cellIndex);
-    cell.classList.add('td--numeric')
-    return cell;
-}
-
-function hide(element) {
-//    element.style.visibility = 'hidden';
-    element.classList.add(hiddenClassName);
-}
-
-function makeVisible(element) {
-//    element.style.visibility = 'visible';
-    element.classList.remove(hiddenClassName);
-}
-
-function suggestNewGame() {
-    hide(clearButton);
-    hide(guessButton);
-    makeVisible(newGameButton);
-}
-
 const newGameButton = document.getElementById('new-game-button');
 newGameButton.addEventListener('click', (event) => {
     event.preventDefault();
     fetch('/game?new=1', {
         method: 'POST'
-    }).then((resp) => {
+    }).then(() => {
         hide(newGameButton);
-        for (let i = 0; i < historyTable.rows.length; i++) {
-            historyTable.deleteRow(i);
-        }
+        clearHistory();
         hide(historyTable);
         makeVisible(clearButton);
         makeVisible(guessButton);
-        resultDiv.innerText = guessPromptMessage;
+        printMain(guessPromptMessage);
     });
 });
 
+
+// Fetches guess result. Assigns result or error to inner text of resultDiv.
+// Adds history entry and clears inputField.
 document.forms['guess-form'].addEventListener('submit', (event) => {
     event.preventDefault();
     fetch(event.target.action, {
@@ -93,9 +72,9 @@ document.forms['guess-form'].addEventListener('submit', (event) => {
         return resp.json();
     }).then((body) => {
         if (body.error !== "") {
-            resultDiv.innerText = body.error;
+            printMain(body.error);
         } else {
-            resultDiv.innerText = body.result;
+            printMain(body.result);
             addHistoryEntry(body.turn, body.guess, body.result);
             inputField.value = '';
         }
@@ -107,3 +86,33 @@ document.forms['guess-form'].addEventListener('submit', (event) => {
         // Catch fire
     });
 });
+
+function printMain(message) {
+    resultDiv.innerText = message;
+}
+
+function clearHistory() {
+    while (historyBody.hasChildNodes()) {
+        historyBody.removeChild(historyBody.firstChild);
+    }
+}
+
+function insertNumericCell(rowElement, cellIndex) {
+    const cell = rowElement.insertCell(cellIndex);
+    cell.classList.add('td--numeric')
+    return cell;
+}
+
+function hide(element) {
+    element.classList.add(hiddenClassName);
+}
+
+function makeVisible(element) {
+    element.classList.remove(hiddenClassName);
+}
+
+function suggestNewGame() {
+    hide(clearButton);
+    hide(guessButton);
+    makeVisible(newGameButton);
+}

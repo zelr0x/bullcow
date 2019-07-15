@@ -23,7 +23,7 @@
     <jsp:attribute name="main">
         <form method="POST" action="/game" class="main__center keys" id="guess-form">
             <input type="text" id="guess-input" name="guess"
-                placeholder="Your guess..." required inputmode=numeric
+                placeholder="Your guess..." autofocus required inputmode=numeric
                 maxlength="${length}" pattern="([0-9]{${length}})"/>
             <div>
                 <c:forEach var="i" begin="0" end="9">

@@ -6,7 +6,7 @@
 table {
     margin: auto;
     min-width: 40%;
-    max-width: 60%;
+    max-width: 80%;
     border-collapse: collapse;
     background-color: #d9d9d9;
     color: #242424;
@@ -30,8 +30,12 @@ td, th {
 }
 
 .td--numeric {
-    text-align: right;
-}
+     text-align: right;
+ }
+
+ .table__header-cell {
+     text-align: center;
+ }
 
 /*
  * Max width before this PARTICULAR table gets nasty
@@ -39,7 +43,7 @@ td, th {
  * and also iPads specifically.
  */
 @media
-only screen and (max-width: 760px),
+only screen and (max-width: 460px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
     table {
         min-width: 80%;
@@ -86,4 +90,8 @@ only screen and (max-width: 760px),
     #rating-table td:nth-of-type(2):before { content: "User"; font-weight: 700; }
     #rating-table td:nth-of-type(3):before { content: "Avg guesses"; font-weight: 700; }
     #rating-table td:nth-of-type(4):before { content: "Games"; font-weight: 700; }
+
+    #history-table td:nth-of-type(1):before { content: "Turn"; font-weight: 700; }
+    #history-table td:nth-of-type(2):before { content: "Guess"; font-weight: 700; }
+    #history-table td:nth-of-type(3):before { content: "Result"; font-weight: 700; }
 }
