@@ -1,6 +1,3 @@
-## Main Features
-* Resolve problems with Player entity creation
-
 ## Design
 * DI!!!
 * GameSession storage in a map?
