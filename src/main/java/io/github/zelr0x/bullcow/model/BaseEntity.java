@@ -3,6 +3,7 @@ package io.github.zelr0x.bullcow.model;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -10,6 +11,9 @@ import java.io.Serializable;
  */
 @MappedSuperclass
 public class BaseEntity implements Serializable {
+    @Transient
+    private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(generator = Constants.ID_GENERATOR)
     private Long id;
