@@ -72,13 +72,11 @@ public final class User extends BaseEntity
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final User user = (User) o;
-        return Objects.equals(player, user.player) &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(password, user.password);
+        return Objects.equals(getId(), user.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(player, name, password);
+        return Objects.hash(getId());
     }
 }
