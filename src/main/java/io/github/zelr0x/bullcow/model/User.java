@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,8 +14,10 @@ import java.util.Objects;
 @SuppressWarnings("checkstyle:all")
 @Entity
 @Table(name = "Users")
-public final class User extends BaseEntity
-        implements Comparable<User>, Serializable {
+public final class User extends BaseEntity implements Comparable<User> {
+    @Transient
+    private static final long serialVersionUID = 1L;
+        
     // Currently, every user creation should create an associated player.
     // OneToOne parameter cascade = CascadeType.ALL is required when JPA methods
     // like session.persist() are used.
