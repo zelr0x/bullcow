@@ -17,6 +17,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "Players")
 public final class Player implements Comparable<Player> {
+    @Transient
+    private static final long serialVersionUID = 1L;
+    
     @Id
     private Long id;
 
